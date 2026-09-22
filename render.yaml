@@ -1,0 +1,14 @@
+services:
+  # The FastAPI Backend
+  - type: web
+    name: vayusutra-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DATABASE_URL
+        value: sqlite:///local_airfare.db # Using SQLite for the free prototype demo
+      - key: ENVIRONMENT
+        value: production
