@@ -35,7 +35,10 @@ export default function App() {
   useEffect(() => {
     const fetchRealData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/inflation/national', {
+        // Automatically switch between local Docker (localhost) and live Render URL (Vercel Env Var)
+        const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+        
+        const response = await fetch(`${baseUrl}/api/v1/inflation/national`, {
           headers: {
             'X-Government-API-Key': 'mospi_admin_778899' // Auth key
           }
